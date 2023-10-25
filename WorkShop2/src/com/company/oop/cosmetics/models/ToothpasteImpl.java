@@ -1,19 +1,44 @@
 package com.company.oop.cosmetics.models;
 
+import com.company.oop.cosmetics.models.contracts.Toothpaste;
 import com.company.oop.cosmetics.models.enums.GenderType;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ToothpasteImpl {
+public class ToothpasteImpl extends ProductImpl implements Toothpaste {
 
     public static final int NAME_MIN_LENGTH = 3;
     public static final int NAME_MAX_LENGTH = 10;
     public static final int BRAND_NAME_MIN_LENGTH = 2;
     public static final int BRAND_NAME_MAX_LENGTH = 10;
+    private List<String> ingredients;
 
     public ToothpasteImpl(String name, String brandName, double price, GenderType genderType, List<String> ingredients) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        super(name,brandName,price,genderType);
+        this.ingredients = new ArrayList<>();
     }
+
+    @Override
+    protected void nameValidation(String name) {
+
+    }
+
+    @Override
+    protected void brandNameValidation(String brandName) {
+
+    }
+
+    @Override
+    protected void priceValidation(double price) {
+
+    }
+
+    @Override
+    public List<String> getIngredients() {
+        return null;
+    }
+
 
 
     /* This method should be uncommented when you are done with the class.
