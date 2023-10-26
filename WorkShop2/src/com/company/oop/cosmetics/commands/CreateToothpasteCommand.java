@@ -26,7 +26,7 @@ public class CreateToothpasteCommand implements Command {
         String toothpasteName = parameters.get(0);
         String toothpasteBrandName = parameters.get(1);
         double toothpastePrice = ParsingHelpers.tryParseDouble(parameters.get(2), ParsingHelpers.INVALID_PRICE);
-        GenderType genderType = ParsingHelpers.tryParseGender(parameters.get(3));
+        GenderType genderType = ParsingHelpers.tryParseGender(parameters.get(3).toUpperCase());
         String ingredients = parameters.get(4);
         List<String> ingredientsList = Arrays.asList(ingredients.split(","));
 

@@ -15,7 +15,7 @@ public class ToothpasteImpl extends ProductImpl implements Toothpaste {
     public static final int NAME_MAX_LENGTH = 10;
     public static final int BRAND_NAME_MIN_LENGTH = 2;
     public static final int BRAND_NAME_MAX_LENGTH = 10;
-    private List<String> ingredients;
+    private final List<String> ingredients;
 
     public ToothpasteImpl(String name, String brandName, double price, GenderType genderType, List<String> ingredients) {
         super(name, brandName, price, genderType);
@@ -29,7 +29,8 @@ public class ToothpasteImpl extends ProductImpl implements Toothpaste {
 
     @Override
     protected void brandNameValidation(String brandName) {
-        ValidationHelpers.validateStringLength(brandName, BRAND_NAME_MIN_LENGTH, BRAND_NAME_MAX_LENGTH, "Brand name");
+        ValidationHelpers.validateStringLength(brandName, BRAND_NAME_MIN_LENGTH, BRAND_NAME_MAX_LENGTH,
+                "Brand name");
     }
 
     @Override
@@ -54,7 +55,7 @@ public class ToothpasteImpl extends ProductImpl implements Toothpaste {
                 """,super.print(),ingredientsToStrings);
     }
 //     #Ingredients: [VALUE, VALUE]
-    /* This method should be uncommented when you are done with the class.
+//     This method should be uncommented when you are done with the class.
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -65,5 +66,5 @@ public class ToothpasteImpl extends ProductImpl implements Toothpaste {
                 getPrice() == toothpaste.getPrice() &&
                 this.getGenderType().equals(toothpaste.getGenderType()) &&
                 getIngredients().equals(toothpaste.getIngredients());
-    }*/
+    }
 }

@@ -4,11 +4,11 @@ import com.company.oop.cosmetics.models.contracts.Product;
 import com.company.oop.cosmetics.models.enums.GenderType;
 
 public abstract class ProductImpl implements Product {
-    protected String name;
-    protected String brandName;
+    private String name;
+    private String brandName;
 
-    protected double price;
-    protected GenderType genderType;
+    private double price;
+    private final GenderType genderType;
 
     public ProductImpl(String name, String brandName, double price, GenderType genderType) {
        nameValidation(name);
@@ -23,6 +23,7 @@ public abstract class ProductImpl implements Product {
     }
 
     private void setName(String name) {
+        nameValidation(name);
         this.name = name;
     }
     protected abstract void nameValidation(String name);
@@ -33,6 +34,7 @@ public abstract class ProductImpl implements Product {
     }
 
     private void setBrandName(String brandName) {
+        brandNameValidation(brandName);
         this.brandName = brandName;
     }
     protected abstract void brandNameValidation(String brandName);
@@ -43,6 +45,7 @@ public abstract class ProductImpl implements Product {
     }
 
     private void setPrice(double price) {
+        priceValidation(price);
         this.price = price;
     }
     protected abstract void priceValidation(double price);
