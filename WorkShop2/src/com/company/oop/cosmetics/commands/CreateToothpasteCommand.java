@@ -4,6 +4,7 @@ import com.company.oop.cosmetics.core.contracts.Command;
 import com.company.oop.cosmetics.core.contracts.CosmeticsRepository;
 import com.company.oop.cosmetics.models.enums.GenderType;
 import com.company.oop.cosmetics.utils.ParsingHelpers;
+import com.company.oop.cosmetics.utils.ValidationHelpers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,6 +24,7 @@ public class CreateToothpasteCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
+        ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         String toothpasteName = parameters.get(0);
         String toothpasteBrandName = parameters.get(1);
         double toothpastePrice = ParsingHelpers.tryParseDouble(parameters.get(2), ParsingHelpers.INVALID_PRICE);

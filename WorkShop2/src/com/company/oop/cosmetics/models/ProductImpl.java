@@ -11,9 +11,10 @@ public abstract class ProductImpl implements Product {
     private final GenderType genderType;
 
     public ProductImpl(String name, String brandName, double price, GenderType genderType) {
-       nameValidation(name);
-       brandNameValidation(brandName);
-       priceValidation(price);
+       setName(name);
+       setBrandName(brandName);
+       setPrice(price);
+
         this.genderType = genderType;
     }
 
@@ -58,10 +59,9 @@ public abstract class ProductImpl implements Product {
     @Override
     public String print(){
         return String.format("""
-                 %s %s
-                Price: $%.2f
-                Gender: %s
-                """,name,brandName,price,genderType);
+            #%s %s
+             #Price: $%.2f
+             #Gender: %s""",name,brandName,price,genderType);
     }
 
 }

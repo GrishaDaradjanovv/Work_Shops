@@ -40,7 +40,6 @@ public class ShampooImpl extends ProductImpl implements Shampoo {
 
     @Override
     protected void priceValidation(double price) {
-//        ParsingHelpers.tryParseDouble(String.valueOf(price), ParsingHelpers.INVALID_PRICE);
         if (price < 0){
             throw new IllegalArgumentException(INVALID_PRICE);
         }
@@ -66,10 +65,10 @@ public class ShampooImpl extends ProductImpl implements Shampoo {
     @Override
     public String print() {
         return String.format("""
-               %s
-                Milliliters: %d
-                Usage: %s
-                """,super.print(),milliliters,usageType);
+            %s
+             #Milliliters: %d
+             #Usage: %s
+            """,super.print(),milliliters,usageType);
     }
     /*
     #{name} {brand}

@@ -48,10 +48,10 @@ public class ToothpasteImpl extends ProductImpl implements Toothpaste {
     @Override
     public String print() {
     List<String>ingredients = getIngredients();
-    String ingredientsToStrings =String.join("," ,ingredients);
+    String ingredientsToStrings =String.join(", " ,ingredients);
         return String.format("""
                  %s
-                Ingredients: [%s]
+                #Ingredients: [%s]
                 """,super.print(),ingredientsToStrings);
     }
 //     #Ingredients: [VALUE, VALUE]
