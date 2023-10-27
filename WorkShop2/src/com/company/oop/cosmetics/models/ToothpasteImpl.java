@@ -11,10 +11,10 @@ import static com.company.oop.cosmetics.utils.ParsingHelpers.INVALID_PRICE;
 
 public class ToothpasteImpl extends ProductImpl implements Toothpaste {
 
-    public static final int NAME_MIN_LENGTH = 3;
-    public static final int NAME_MAX_LENGTH = 10;
-    public static final int BRAND_NAME_MIN_LENGTH = 2;
-    public static final int BRAND_NAME_MAX_LENGTH = 10;
+    private static final int NAME_MIN_LENGTH = 3;
+    private static final int NAME_MAX_LENGTH = 10;
+    private static final int BRAND_NAME_MIN_LENGTH = 2;
+    private static final int BRAND_NAME_MAX_LENGTH = 10;
     private final List<String> ingredients;
 
     public ToothpasteImpl(String name, String brandName, double price, GenderType genderType, List<String> ingredients) {

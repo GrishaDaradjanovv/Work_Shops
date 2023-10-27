@@ -5,6 +5,7 @@ import com.company.oop.cosmetics.core.contracts.CosmeticsRepository;
 import com.company.oop.cosmetics.models.contracts.Category;
 import com.company.oop.cosmetics.models.contracts.Product;
 import com.company.oop.cosmetics.models.enums.GenderType;
+import com.company.oop.cosmetics.models.enums.ScentType;
 import com.company.oop.cosmetics.models.enums.UsageType;
 import com.company.oop.cosmetics.tests.models.CategoryTests;
 import com.company.oop.cosmetics.tests.models.ShampooTests;
@@ -15,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.company.oop.cosmetics.tests.models.CreamTests.VALID_CREAM_BRAND_NAME;
+import static com.company.oop.cosmetics.tests.models.CreamTests.VALID_CREAM_NAME;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CosmeticsRepositoryImplTests {
@@ -126,19 +129,19 @@ public class CosmeticsRepositoryImplTests {
         );
     }
 
-//    @Test
-//    public void createCream_Should_AddCreamToList() {
-//        //Arrange, Act, Assert
-//        assertAll(
-//                () -> assertDoesNotThrow(() -> cosmeticsRepository.createCream(
-//                        VALID_CREAM_NAME,
-//                        VALID_CREAM_BRAND_NAME,
-//                        10.75,
-//                        GenderType.MEN,
-//                        ScentType.LAVENDER)),
-//                () -> assertEquals(1, cosmeticsRepository.getProducts().size())
-//        );
-//    }
+    @Test
+    public void createCream_Should_AddCreamToList() {
+        //Arrange, Act, Assert
+        assertAll(
+                () -> assertDoesNotThrow(() -> cosmeticsRepository.createCream(
+                        VALID_CREAM_NAME,
+                        VALID_CREAM_BRAND_NAME,
+                        10.75,
+                        GenderType.MEN,
+                        ScentType.LAVENDER)),
+                () -> assertEquals(1, cosmeticsRepository.getProducts().size())
+        );
+    }
 
     @Test
     public void createCategory_Should_AddCategoryToList() {

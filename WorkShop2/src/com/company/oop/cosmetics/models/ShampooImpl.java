@@ -20,7 +20,7 @@ public class ShampooImpl extends ProductImpl implements Shampoo {
 //    private static final String BRAND_ERROR_MSG = String.format("Brand should be between %d and %d symbols."
 //            , BRAND_NAME_MIN_LENGTH, BRAND_NAME_MAX_LENGTH);
     private int milliliters;
-    private UsageType usageType;
+    private final UsageType usageType;
 
     public ShampooImpl(String name, String brand, double price, GenderType genderType, int milliliters, UsageType usageType) {
         super(name, brand, price, genderType);
