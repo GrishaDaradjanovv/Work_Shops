@@ -9,8 +9,8 @@ import java.util.List;
 
 public class CategoryImpl implements Category {
 
-    public static final int NAME_MIN_LENGTH = 2;
-    public static final int NAME_MAX_LENGTH = 15;
+    private static final int NAME_MIN_LENGTH = 2;
+    private static final int NAME_MAX_LENGTH = 15;
     private static final String DELETE_PRODUCT_ERROR_MESSAGE = "Product not found in category.";
 
     private String name;

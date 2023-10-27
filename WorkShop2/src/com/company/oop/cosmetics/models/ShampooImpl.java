@@ -5,6 +5,7 @@ import com.company.oop.cosmetics.models.enums.GenderType;
 import com.company.oop.cosmetics.models.enums.UsageType;
 import com.company.oop.cosmetics.utils.ParsingHelpers;
 import com.company.oop.cosmetics.utils.ValidationHelpers;
+
 import static com.company.oop.cosmetics.utils.ParsingHelpers.INVALID_MILLILITRES;
 import static com.company.oop.cosmetics.utils.ParsingHelpers.INVALID_PRICE;
 
@@ -13,12 +14,8 @@ public class ShampooImpl extends ProductImpl implements Shampoo {
 
     private static final int NAME_MIN_LENGTH = 3;
     private static final int NAME_MAX_LENGTH = 10;
-//    private static final String NAME_ERROR_MSG = String.format("Name should be between %d and %d symbols."
-//            , NAME_MIN_LENGTH, NAME_MAX_LENGTH);
     private static final int BRAND_NAME_MIN_LENGTH = 2;
     private static final int BRAND_NAME_MAX_LENGTH = 10;
-//    private static final String BRAND_ERROR_MSG = String.format("Brand should be between %d and %d symbols."
-//            , BRAND_NAME_MIN_LENGTH, BRAND_NAME_MAX_LENGTH);
     private int milliliters;
     private final UsageType usageType;
 
@@ -32,6 +29,7 @@ public class ShampooImpl extends ProductImpl implements Shampoo {
     protected void nameValidation(String name) {
         ValidationHelpers.validateStringLength(name, NAME_MIN_LENGTH, NAME_MAX_LENGTH, "Name");
     }
+
     @Override
     protected void brandNameValidation(String brandName) {
         ValidationHelpers.validateStringLength(brandName, BRAND_NAME_MIN_LENGTH, BRAND_NAME_MAX_LENGTH,
@@ -40,18 +38,19 @@ public class ShampooImpl extends ProductImpl implements Shampoo {
 
     @Override
     protected void priceValidation(double price) {
-        if (price < 0){
+        if (price < 0) {
             throw new IllegalArgumentException(INVALID_PRICE);
         }
     }
 
     private void setMilliliters(int milliliters) {
-        if (milliliters < 0){
+        if (milliliters < 0) {
             throw new IllegalArgumentException(INVALID_MILLILITRES);
-        }else {
-            this. milliliters = milliliters;
+        } else {
+            this.milliliters = milliliters;
         }
     }
+
     @Override
     public int getMillilitres() {
         return this.milliliters;
@@ -65,11 +64,12 @@ public class ShampooImpl extends ProductImpl implements Shampoo {
     @Override
     public String print() {
         return String.format("""
-            %s
-             #Milliliters: %d
-             #Usage: %s
-            """,super.print(),milliliters,usageType);
+                %s
+                 #Milliliters: %d
+                 #Usage: %s
+                """, super.print(), milliliters, usageType);
     }
+
     /*
     #{name} {brand}
  #Price: {price}

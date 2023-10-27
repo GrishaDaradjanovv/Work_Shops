@@ -46,7 +46,7 @@ public class CreamImpl extends ProductImpl implements Cream {
     public String print() {
         return String.format("""
                  %s
-                #Scent: %s
+                 #Scent: %s
                 """, super.print(),getScent());
     }
     public boolean equals(Object o) {
