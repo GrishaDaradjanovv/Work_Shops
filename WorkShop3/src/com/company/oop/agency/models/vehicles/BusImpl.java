@@ -5,10 +5,10 @@ import com.company.oop.agency.utils.ValidationHelper;
 
 public class BusImpl extends VehicleImpl implements Bus {
 
-    public static final int PASSENGER_MIN_VALUE = 10;
-    public static final int PASSENGER_MAX_VALUE = 50;
-    public static final double PRICE_MIN_VALUE = 0.1;
-    public static final double PRICE_MAX_VALUE = 2.5;
+    private static final int PASSENGER_MIN_VALUE = 10;
+    private static final int PASSENGER_MAX_VALUE = 50;
+    private static final double PRICE_MIN_VALUE = 0.1;
+    private static final double PRICE_MAX_VALUE = 2.5;
     private static final String BUS_PASSENGER_ERROR_LENGTH = String.format(
             "A bus cannot have less than %d passengers or more than %d passengers."
             , PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE);
@@ -18,7 +18,7 @@ public class BusImpl extends VehicleImpl implements Bus {
     private int id;
 
     public BusImpl(int id, int passengerCapacity, double pricePerKilometer) {
-        super(passengerCapacity,pricePerKilometer,VehicleType.LAND);
+        super(passengerCapacity, pricePerKilometer, id);
     }
 
     @Override
@@ -30,5 +30,17 @@ public class BusImpl extends VehicleImpl implements Bus {
     @Override
     void validatePricePerKm() {
         ValidationHelper.validateValueInRange(getPricePerKilometer(), PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
+    }
+    @Override
+    public VehicleType getType() {
+        return VehicleType.LAND;
+    }
+
+    @Override
+    public String getAsString() {
+        return String.format("""
+                Bus----
+                %s
+                """, super.getAsString());
     }
 }

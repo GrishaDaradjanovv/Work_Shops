@@ -5,12 +5,12 @@ import com.company.oop.agency.models.vehicles.contracts.Vehicle;
 public abstract class VehicleImpl implements Vehicle {
     private int passengerCapacity;
     private double pricePerKilometer;
-    VehicleType vehicleType;
+    private int id;
 
-    public VehicleImpl(int passengerCapacity, double pricePerKilometer, VehicleType vehicleType) {
+    public VehicleImpl(int passengerCapacity, double pricePerKilometer, int id) {
        setPassengerCapacity(passengerCapacity);
        setPricePerKilometer(pricePerKilometer);
-        this.vehicleType = vehicleType;
+       setId(id);
     }
 
     private void setPassengerCapacity(int passengerCapacity) {
@@ -24,12 +24,6 @@ public abstract class VehicleImpl implements Vehicle {
     }
      abstract void validatePassengerCapacity();
      abstract void validatePricePerKm();
-
-    @Override
-    public VehicleType getType() {
-        return vehicleType;
-    }
-
     @Override
     public int getPassengerCapacity() {
         return passengerCapacity;
@@ -39,7 +33,24 @@ public abstract class VehicleImpl implements Vehicle {
     public double getPricePerKilometer() {
         return pricePerKilometer;
     }
-    public String print(){
+    private void setId(int id){
+        this.id = id;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+    //    public String print(){
+//        return String.format("""
+//                Passenger capacity: %d
+//                Price per kilometer: %.2f
+//                Vehicle type: %s
+//                """,getPassengerCapacity(),getPricePerKilometer(),getType());
+//    }
+
+    @Override
+    public String getAsString() {
         return String.format("""
                 Passenger capacity: %d
                 Price per kilometer: %.2f

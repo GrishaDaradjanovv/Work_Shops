@@ -16,11 +16,11 @@ public class AirplaneImpl extends VehicleImpl implements Airplane {
     public static final String PRICE_ERR_MSG = String.format(
             "A vehicle with a price per kilometer lower than $%.2f or higher than $%.2f cannot exist!"
             , PRICE_MIN_VALUE, PRICE_MAX_VALUE);
-    private int id;
-    private boolean hasFreeFood = true;
+    private final boolean hasFreeFood;
 
     public AirplaneImpl(int id, int passengerCapacity, double pricePerKilometer, boolean hasFreeFood) {
-        super(passengerCapacity, pricePerKilometer, VehicleType.AIR);
+        super(passengerCapacity, pricePerKilometer,id);
+        this.hasFreeFood = hasFreeFood;
     }
 
     @Override
@@ -36,19 +36,28 @@ public class AirplaneImpl extends VehicleImpl implements Airplane {
 
     @Override
     public boolean hasFreeFood() {
-       if (hasFreeFood){
-           return false;
-       }else {
-           return true;
-       }
+       return hasFreeFood;
     }
 
     @Override
-    public String print() {
+    public VehicleType getType() {
+        return VehicleType.AIR;
+    }
+    //    @Override
+//    public String print() {
+//        return String.format("""
+//                Airplane----
+//                %s
+//                Has free food: %s
+//                """,super.print(),hasFreeFood) ;
+//
+
+    @Override
+    public String getAsString() {
         return String.format("""
                 Airplane----
                 %s
                 Has free food: %s
-                """,super.print(),hasFreeFood) ;
+                """,super.getAsString(),hasFreeFood) ;
     }
 }
