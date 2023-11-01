@@ -1,14 +1,54 @@
 package com.company.oop.agency.models.vehicles;
 
-public class AirplaneImpl {
+import com.company.oop.agency.models.vehicles.contracts.Airplane;
+import com.company.oop.agency.utils.ParsingHelpers;
+import com.company.oop.agency.utils.ValidationHelper;
 
-    public static final int PASSENGER_MIN_VALUE = 1;
-    public static final int PASSENGER_MAX_VALUE = 800;
-    public static final double PRICE_MIN_VALUE = 0.1;
-    public static final double PRICE_MAX_VALUE = 2.5;
+public class AirplaneImpl extends VehicleImpl implements Airplane {
+
+    private static final int PASSENGER_MIN_VALUE = 1;
+    private static final int PASSENGER_MAX_VALUE = 800;
+    private static final double PRICE_MIN_VALUE = 0.1;
+    private static final double PRICE_MAX_VALUE = 2.5;
+    private static final String AIRPLANE_PASSENGER_ERROR_LENGTH = String.format(
+            "An airplane cannot have less than %d passengers or more than %d passengers."
+            , PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE);
+    public static final String PRICE_ERR_MSG = String.format(
+            "A vehicle with a price per kilometer lower than $%.2f or higher than $%.2f cannot exist!"
+            , PRICE_MIN_VALUE, PRICE_MAX_VALUE);
+    private int id;
+    private boolean hasFreeFood = true;
 
     public AirplaneImpl(int id, int passengerCapacity, double pricePerKilometer, boolean hasFreeFood) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        super(passengerCapacity, pricePerKilometer, VehicleType.AIR);
     }
 
+    @Override
+    void validatePassengerCapacity() {
+        ValidationHelper.validateValueInRange(getPassengerCapacity(), PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
+                , AIRPLANE_PASSENGER_ERROR_LENGTH);
+    }
+
+    @Override
+    void validatePricePerKm() {
+        ValidationHelper.validateValueInRange(getPricePerKilometer(), PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
+    }
+
+    @Override
+    public boolean hasFreeFood() {
+       if (hasFreeFood){
+           return false;
+       }else {
+           return true;
+       }
+    }
+
+    @Override
+    public String print() {
+        return String.format("""
+                Airplane----
+                %s
+                Has free food: %s
+                """,super.print(),hasFreeFood) ;
+    }
 }

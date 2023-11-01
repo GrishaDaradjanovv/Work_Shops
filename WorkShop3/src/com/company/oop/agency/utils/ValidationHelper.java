@@ -8,7 +8,9 @@ public class ValidationHelper {
 
     public static void validateValueInRange(double value, double min, double max, String errorMessage) {
         // Needs to check if value > min and if value < max
-        throw new UnsupportedOperationException("Not implemented yet.");
+        if (value < min || value > max){
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 
     public static void validateStringLength(String stringToValidate, int minLength, int maxLength, String errorMessage) {
