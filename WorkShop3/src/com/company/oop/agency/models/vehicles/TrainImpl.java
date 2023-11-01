@@ -34,14 +34,14 @@ public class TrainImpl extends VehicleImpl implements Train {
     }
 
     @Override
-    void validatePassengerCapacity() {
-        ValidationHelper.validateValueInRange(getPassengerCapacity(), PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
+    void validatePassengerCapacity(int passengerCapacity) {
+        ValidationHelper.validateValueInRange(passengerCapacity, PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
                 , TRAIN_PASSENGER_ERROR_LENGTH);
     }
 
     @Override
-    void validatePricePerKm() {
-        ValidationHelper.validateValueInRange(getPricePerKilometer(), PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
+    void validatePricePerKm(double pricePerKilometer) {
+        ValidationHelper.validateValueInRange(pricePerKilometer, PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
     }
 
 

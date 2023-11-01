@@ -14,16 +14,16 @@ public abstract class VehicleImpl implements Vehicle {
     }
 
     private void setPassengerCapacity(int passengerCapacity) {
-        validatePassengerCapacity();
+        validatePassengerCapacity(passengerCapacity);
         this.passengerCapacity = passengerCapacity;
     }
 
     private void setPricePerKilometer(double pricePerKilometer) {
-        validatePricePerKm();
+        validatePricePerKm(pricePerKilometer);
         this.pricePerKilometer = pricePerKilometer;
     }
-     abstract void validatePassengerCapacity();
-     abstract void validatePricePerKm();
+     abstract void validatePassengerCapacity(int passengerCapacity);
+     abstract void validatePricePerKm(double pricePerKilometer);
     @Override
     public int getPassengerCapacity() {
         return passengerCapacity;

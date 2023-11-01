@@ -1,7 +1,6 @@
 package com.company.oop.agency.models.vehicles;
 
 import com.company.oop.agency.models.vehicles.contracts.Airplane;
-import com.company.oop.agency.utils.ParsingHelpers;
 import com.company.oop.agency.utils.ValidationHelper;
 
 public class AirplaneImpl extends VehicleImpl implements Airplane {
@@ -24,14 +23,14 @@ public class AirplaneImpl extends VehicleImpl implements Airplane {
     }
 
     @Override
-    void validatePassengerCapacity() {
-        ValidationHelper.validateValueInRange(getPassengerCapacity(), PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
+    void validatePassengerCapacity(int passengerCapacity) {
+        ValidationHelper.validateValueInRange(passengerCapacity, PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
                 , AIRPLANE_PASSENGER_ERROR_LENGTH);
     }
 
     @Override
-    void validatePricePerKm() {
-        ValidationHelper.validateValueInRange(getPricePerKilometer(), PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
+    void validatePricePerKm(double pricePerKilometer) {
+        ValidationHelper.validateValueInRange(pricePerKilometer, PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
     }
 
     @Override

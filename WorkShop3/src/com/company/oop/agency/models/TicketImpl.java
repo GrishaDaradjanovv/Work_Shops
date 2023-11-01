@@ -1,5 +1,6 @@
 package com.company.oop.agency.models;
 
+import com.company.oop.agency.exceptions.InvalidUserInputException;
 import com.company.oop.agency.models.contracts.Journey;
 import com.company.oop.agency.models.contracts.Ticket;
 
@@ -25,7 +26,7 @@ public class TicketImpl implements Ticket {
 
     private void setCosts(double costs) {
         if (costs < 0){
-            throw new IllegalArgumentException(COSTS_ERR_MSG);
+            throw new InvalidUserInputException(COSTS_ERR_MSG);
         }
         this.costs = costs;
     }

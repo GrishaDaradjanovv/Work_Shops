@@ -15,21 +15,20 @@ public class BusImpl extends VehicleImpl implements Bus {
     public static final String PRICE_ERR_MSG = String.format(
             "A vehicle with a price per kilometer lower than $%.2f or higher than $%.2f cannot exist!"
             , PRICE_MIN_VALUE, PRICE_MAX_VALUE);
-    private int id;
 
     public BusImpl(int id, int passengerCapacity, double pricePerKilometer) {
         super(passengerCapacity, pricePerKilometer, id);
     }
 
     @Override
-    void validatePassengerCapacity() {
-        ValidationHelper.validateValueInRange(getPassengerCapacity(), PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
+    void validatePassengerCapacity(int passengerCapacity) {
+        ValidationHelper.validateValueInRange(passengerCapacity, PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
                 , BUS_PASSENGER_ERROR_LENGTH);
     }
 
     @Override
-    void validatePricePerKm() {
-        ValidationHelper.validateValueInRange(getPricePerKilometer(), PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
+    void validatePricePerKm(double pricePerKilometer) {
+        ValidationHelper.validateValueInRange(pricePerKilometer, PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
     }
     @Override
     public VehicleType getType() {
