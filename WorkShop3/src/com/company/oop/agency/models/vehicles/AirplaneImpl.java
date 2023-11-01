@@ -54,7 +54,7 @@ public class AirplaneImpl extends VehicleImpl implements Airplane {
     @Override
     public String getAsString() {
         return String.format("""
-                Airplane----
+                Airplane ----
                 %s
                 Has free food: %s
                 """,super.getAsString(),hasFreeFood) ;

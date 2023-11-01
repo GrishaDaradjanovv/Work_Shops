@@ -5,10 +5,10 @@ import com.company.oop.agency.models.contracts.Journey;
 import com.company.oop.agency.models.contracts.Ticket;
 
 public class TicketImpl implements Ticket {
-    private static final String COSTS_ERR_MSG = "Costs must be a number.";
     private int id;
-        private Journey journey;
-        private double costs;
+    private Journey journey;
+    private double costs;
+    private static final String COSTS_ERR_MSG = "Value of 'costs' must be a positive number. Actual value: %.2f.";
 
     public TicketImpl(int id, Journey journey, double costs) {
         setId(id);
@@ -26,7 +26,7 @@ public class TicketImpl implements Ticket {
 
     private void setCosts(double costs) {
         if (costs < 0){
-            throw new InvalidUserInputException(COSTS_ERR_MSG);
+            throw new InvalidUserInputException(String.format(COSTS_ERR_MSG,costs));
         }
         this.costs = costs;
     }

@@ -38,7 +38,7 @@ public class BusImpl extends VehicleImpl implements Bus {
     @Override
     public String getAsString() {
         return String.format("""
-                Bus----
+                Bus ----
                 %s
                 """, super.getAsString());
     }

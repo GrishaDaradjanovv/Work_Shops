@@ -54,8 +54,7 @@ public abstract class VehicleImpl implements Vehicle {
         return String.format("""
                 Passenger capacity: %d
                 Price per kilometer: %.2f
-                Vehicle type: %s
-                """,getPassengerCapacity(),getPricePerKilometer(),getType());
+                Vehicle type: %s""",getPassengerCapacity(),getPricePerKilometer(),getType());
     }
     /*
     Passenger capacity: {capacity}

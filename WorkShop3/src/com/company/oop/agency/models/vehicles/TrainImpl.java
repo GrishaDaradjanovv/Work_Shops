@@ -69,7 +69,7 @@ public class TrainImpl extends VehicleImpl implements Train {
     @Override
     public String getAsString() {
         return String.format("""
-                Train----
+                Train ----
                 %s
                 Carts amount: %d
                 """, super.getAsString(), getCarts());

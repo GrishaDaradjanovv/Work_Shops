@@ -16,7 +16,7 @@ public class JourneyImpl implements Journey {
             "The StartingLocation's length cannot be less than %d or more than %d symbols long.",
             START_LOCATION_MIN_LENGTH, START_LOCATION_MAX_LENGTH);
     public static final String DESTINATION_ERR_MSG = String.format(
-            "The Destination'slength cannot be less than %d or more than %d symbols long.",
+            "The Destination's length cannot be less than %d or more than %d symbols long.",
             DESTINATION_MIN_LENGTH, DESTINATION_MAX_LENGTH);
     public static final String DISTANCE_ERR_MSG = "The Distance cannot be less than 5 or more than 5000 kilometers.";
 
@@ -92,7 +92,7 @@ public class JourneyImpl implements Journey {
     @Override
     public String getAsString() {
         return String.format("""
-                Journey----
+                Journey ----
                 Start location: %s
                 Destination: %s
                 Distance: %d
