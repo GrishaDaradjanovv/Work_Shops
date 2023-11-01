@@ -1,11 +1,62 @@
 package com.company.oop.agency.models;
 
 import com.company.oop.agency.models.contracts.Journey;
+import com.company.oop.agency.models.contracts.Ticket;
 
-public class TicketImpl {
+public class TicketImpl implements Ticket {
+    private static final String COSTS_ERR_MSG = "Costs must be a number.";
+    private int id;
+        private Journey journey;
+        private double costs;
 
     public TicketImpl(int id, Journey journey, double costs) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        setId(id);
+        setJourney(journey);
+        setCosts(costs);
     }
 
+    private void setId(int id) {
+        this.id = id;
+    }
+
+    private void setJourney(Journey journey) {
+        this.journey = journey;
+    }
+
+    private void setCosts(double costs) {
+        if (costs < 0){
+            throw new IllegalArgumentException(COSTS_ERR_MSG);
+        }
+        this.costs = costs;
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public Journey getJourney() {
+        return journey;
+    }
+
+    @Override
+    public double calculatePrice() {
+        return  costs * journey.calculateTravelCosts();
+
+    }
+
+    @Override
+    public double getAdministrativeCosts() {
+        return costs;
+    }
+
+    @Override
+    public String getAsString() {
+        return String.format("""
+                Ticket ----
+                Destination: %s
+                Price: $%.2f
+                """,journey.getDestination(),calculatePrice());
+    }
 }
