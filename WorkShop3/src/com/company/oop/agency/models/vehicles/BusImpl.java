@@ -12,7 +12,7 @@ public class BusImpl extends VehicleImpl implements Bus {
     private static final String BUS_PASSENGER_ERROR_LENGTH = String.format(
             "A bus cannot have less than %d passengers or more than %d passengers."
             , PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE);
-    public static final String PRICE_ERR_MSG = String.format(
+    private static final String PRICE_ERR_MSG = String.format(
             "A vehicle with a price per kilometer lower than $%.2f or higher than $%.2f cannot exist!"
             , PRICE_MIN_VALUE, PRICE_MAX_VALUE);
 
@@ -21,13 +21,13 @@ public class BusImpl extends VehicleImpl implements Bus {
     }
 
     @Override
-    void validatePassengerCapacity(int passengerCapacity) {
+    protected void validatePassengerCapacity(int passengerCapacity) {
         ValidationHelper.validateValueInRange(passengerCapacity, PASSENGER_MIN_VALUE, PASSENGER_MAX_VALUE
                 , BUS_PASSENGER_ERROR_LENGTH);
     }
 
     @Override
-    void validatePricePerKm(double pricePerKilometer) {
+    protected void validatePricePerKm(double pricePerKilometer) {
         ValidationHelper.validateValueInRange(pricePerKilometer, PRICE_MIN_VALUE, PRICE_MAX_VALUE, PRICE_ERR_MSG);
     }
     @Override

@@ -3,6 +3,7 @@ package com.company.oop.agency.core;
 import com.company.oop.agency.exceptions.ElementNotFoundException;
 import com.company.oop.agency.models.JourneyImpl;
 import com.company.oop.agency.models.TicketImpl;
+import com.company.oop.agency.models.contracts.Identifiable;
 import com.company.oop.agency.models.contracts.Journey;
 import com.company.oop.agency.models.contracts.Ticket;
 import com.company.oop.agency.models.vehicles.AirplaneImpl;
@@ -46,38 +47,28 @@ public class AgencyRepositoryImpl implements AgencyRepository {
 
     @Override
     public Vehicle findVehicleById(int id) {
-        for (Vehicle vehicle : getVehicles()) {
-            if (vehicle.getId() == id) {
-                return vehicle;
-            }
-        }
-
-        throw new ElementNotFoundException(String.format("No record with ID %d", id));
+        return findElementById(vehicles, id);
     }
 
     @Override
     public Journey findJourneyById(int id) {
-        for (Journey journey : journeys) {
-            if (journey.getId() == id){
-                return journey;
-            }
-        }
-        throw new ElementNotFoundException(String.format("No record with %d ID.",id));
+        return findElementById(journeys, id);
     }
 
     @Override
     public Ticket findTicketById(int id) {
-        for (Ticket ticket : tickets) {
-            if (ticket.getId() == id){
-                return ticket;
-            }
-        }
-        throw new ElementNotFoundException(String.format("No record with %d ID.",id));
+//        for (Ticket ticket : tickets) {
+//            if (ticket.getId() == id){
+//                return ticket;
+//            }
+//        }
+//        throw new ElementNotFoundException(String.format("No record with %d ID.",id));
+        return findElementById(tickets, id);
     }
 
     @Override
     public Airplane createAirplane(int passengerCapacity, double pricePerKilometer, boolean hasFreeFood) {
-        Airplane airplane = new AirplaneImpl(++nextId, passengerCapacity,pricePerKilometer,hasFreeFood);
+        Airplane airplane = new AirplaneImpl(++nextId, passengerCapacity, pricePerKilometer, hasFreeFood);
         this.vehicles.add(airplane);
         return airplane;
     }
@@ -91,25 +82,32 @@ public class AgencyRepositoryImpl implements AgencyRepository {
 
     @Override
     public Train createTrain(int passengerCapacity, double pricePerKilometer, int carts) {
-        Train train = new TrainImpl(++nextId,passengerCapacity,pricePerKilometer,carts);
+        Train train = new TrainImpl(++nextId, passengerCapacity, pricePerKilometer, carts);
         this.vehicles.add(train);
         return train;
     }
 
     @Override
     public Journey createJourney(String startLocation, String destination, int distance, Vehicle vehicle) {
-        Journey journey = new JourneyImpl(++nextId,startLocation,destination,distance,vehicle);
+        Journey journey = new JourneyImpl(++nextId, startLocation, destination, distance, vehicle);
         this.journeys.add(journey);
         return journey;
     }
 
     @Override
     public Ticket createTicket(Journey journey, double costs) {
-        Ticket ticket = new TicketImpl(++nextId,journey,costs);
+        Ticket ticket = new TicketImpl(++nextId, journey, costs);
         this.tickets.add(ticket);
         return ticket;
     }
 
     // Advanced task: Implement the following generic method that looks for an item by id.
-    // private <T extends {{?}}> T findElementById(List<T> elements, int id) { }
+    private <T extends Identifiable> T findElementById(List<T> elements, int id) {
+        for (T element : elements) {
+            if (element.getId() == id) {
+                return element;
+            }
+        }
+        throw new ElementNotFoundException(String.format("No record with %d ID.", id));
+    }
 }

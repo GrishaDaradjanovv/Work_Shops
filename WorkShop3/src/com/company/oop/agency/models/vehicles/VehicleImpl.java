@@ -8,9 +8,9 @@ public abstract class VehicleImpl implements Vehicle {
     private int id;
 
     public VehicleImpl(int passengerCapacity, double pricePerKilometer, int id) {
-       setPassengerCapacity(passengerCapacity);
-       setPricePerKilometer(pricePerKilometer);
-       setId(id);
+        setPassengerCapacity(passengerCapacity);
+        setPricePerKilometer(pricePerKilometer);
+        setId(id);
     }
 
     private void setPassengerCapacity(int passengerCapacity) {
@@ -22,8 +22,11 @@ public abstract class VehicleImpl implements Vehicle {
         validatePricePerKm(pricePerKilometer);
         this.pricePerKilometer = pricePerKilometer;
     }
-     abstract void validatePassengerCapacity(int passengerCapacity);
-     abstract void validatePricePerKm(double pricePerKilometer);
+
+    protected abstract void validatePassengerCapacity(int passengerCapacity);
+
+    protected abstract void validatePricePerKm(double pricePerKilometer);
+
     @Override
     public int getPassengerCapacity() {
         return passengerCapacity;
@@ -33,7 +36,8 @@ public abstract class VehicleImpl implements Vehicle {
     public double getPricePerKilometer() {
         return pricePerKilometer;
     }
-    private void setId(int id){
+
+    private void setId(int id) {
         this.id = id;
     }
 
@@ -54,7 +58,7 @@ public abstract class VehicleImpl implements Vehicle {
         return String.format("""
                 Passenger capacity: %d
                 Price per kilometer: %.2f
-                Vehicle type: %s""",getPassengerCapacity(),getPricePerKilometer(),getType());
+                Vehicle type: %s""", getPassengerCapacity(), getPricePerKilometer(), getType());
     }
     /*
     Passenger capacity: {capacity}
