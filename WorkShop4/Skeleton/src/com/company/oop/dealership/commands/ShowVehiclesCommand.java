@@ -4,6 +4,7 @@ import com.company.oop.dealership.core.contracts.VehicleDealershipRepository;
 import com.company.oop.dealership.models.contracts.User;
 import com.company.oop.dealership.utils.ValidationHelpers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowVehiclesCommand extends BaseCommand {

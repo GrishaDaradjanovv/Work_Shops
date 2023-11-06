@@ -33,7 +33,6 @@ public class TruckImpl extends VehicleImpl implements Truck {
             WEIGHT_CAP_MIN,
             WEIGHT_CAP_MAX);
 
-    //TODO
     private int weightCapacity;
 
     public TruckImpl(String make, String model, double price, int weightCapacity){

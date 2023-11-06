@@ -62,20 +62,20 @@ public class CarImpl extends VehicleImpl implements Car {
         return 4;
     }
 
-//    @Override
-//    public List<Comment> getComments() {
-//        return new ArrayList<>(comments);
-//    }
-//
-//    @Override
-//    public void addComment(Comment comment) {
-//        comments.add(comment);
-//    }
-//
-//    @Override
-//    public void removeComment(Comment comment) {
-//        comments.remove(comment);
-//    }
+    @Override
+    public List<Comment> getComments() {
+        return new ArrayList<>(comments);
+    }
+
+    @Override
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    @Override
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+    }
 
     @Override
     public String toString() {

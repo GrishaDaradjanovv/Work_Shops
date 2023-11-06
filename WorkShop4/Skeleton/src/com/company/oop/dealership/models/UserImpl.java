@@ -54,7 +54,6 @@ public class UserImpl implements User {
     private final static String USER_HEADER = "--USER %s--";
     private static final int NORMAL_ROLE_VEHICLE_LIMIT = 5;
 
-    //TODO
     private String username;
     private String firstName;
     private String lastName;
@@ -81,27 +80,31 @@ public class UserImpl implements User {
     }
 
     private void setUsername(String username) {
-        ValidationHelpers.validateStringLength(username, USERNAME_LEN_MIN, USERNAME_LEN_MAX, USERNAME_LEN_ERR);
+        usernamePattern(username);
+        ValidationHelpers.validateIntRange(username.length(), USERNAME_LEN_MIN, USERNAME_LEN_MAX, USERNAME_LEN_ERR);
         this.username = username;
+    }
+    private void usernamePattern(String username){
+        ValidationHelpers.validatePattern(username,USERNAME_REGEX_PATTERN,USERNAME_PATTERN_ERR);
     }
 
     private void setFirstName(String firstName) {
-        ValidationHelpers.validateStringLength(firstName, FIRST_NAME_LEN_MIN, FIRST_NAME_LEN_MAX, FIRSTNAME_LEN_ERR);
+        ValidationHelpers.validateIntRange(firstName.length(), FIRST_NAME_LEN_MIN, FIRST_NAME_LEN_MAX, FIRSTNAME_LEN_ERR);
         this.firstName = firstName;
     }
 
     private void setLastName(String lastName) {
-        ValidationHelpers.validateStringLength(lastName, LAST_NAME_LEN_MIN, LAST_NAME_LEN_MAX, LAST_NAME_LEN_ERR);
+        ValidationHelpers.validateIntRange(lastName.length(), LAST_NAME_LEN_MIN, LAST_NAME_LEN_MAX, LAST_NAME_LEN_ERR);
         this.lastName = lastName;
     }
 
     private void setPassword(String password) {
-        ValidationHelpers.validateStringLength(password,PASSWORD_LEN_MIN,PASSWORD_LEN_MAX,PASSWORD_LEN_ERR);
-        validatePattern();
+        ValidationHelpers.validateIntRange(password.length(),PASSWORD_LEN_MIN,PASSWORD_LEN_MAX,PASSWORD_LEN_ERR);
+        validatePattern(password);
         this.password = password;
     }
 
-    private void validatePattern() {
+    private void validatePattern(String password) {
         ValidationHelpers.validatePattern(password, PASSWORD_REGEX_PATTERN, PASSWORD_PATTERN_ERR);
     }
 
@@ -145,7 +148,7 @@ public class UserImpl implements User {
             case VIP -> vehicles.add(vehicle);
             case ADMIN ->throw new IllegalArgumentException(ADMIN_CANNOT_ADD_VEHICLES);
             case NORMAL -> {
-                if (vehicles.size() > NORMAL_ROLE_VEHICLE_LIMIT){
+                if (vehicles.size() >= NORMAL_ROLE_VEHICLE_LIMIT){
                 throw new IllegalArgumentException(String.format("%s %d",
                         NOT_AN_VIP_USER_VEHICLES_ADD,
                         NORMAL_ROLE_VEHICLE_LIMIT));

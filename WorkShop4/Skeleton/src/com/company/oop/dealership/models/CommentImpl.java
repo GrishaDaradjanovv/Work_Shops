@@ -14,7 +14,6 @@ public class CommentImpl implements Comment {
             CONTENT_LEN_MIN,
             CONTENT_LEN_MAX);
 
-    //TODO
     String author;
     String content;
 
@@ -24,7 +23,7 @@ public class CommentImpl implements Comment {
     }
 
     private void setContent(String content) {
-        ValidationHelpers.validateStringLength(content,CONTENT_LEN_MIN,CONTENT_LEN_MAX,CONTENT_LEN_ERR);
+        ValidationHelpers.validateIntRange(content.length(),CONTENT_LEN_MIN,CONTENT_LEN_MAX,CONTENT_LEN_ERR);
         this.content = content;
     }
 

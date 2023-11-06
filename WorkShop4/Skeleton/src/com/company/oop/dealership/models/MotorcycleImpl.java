@@ -38,7 +38,6 @@ public class MotorcycleImpl extends VehicleImpl implements Motorcycle{
             CATEGORY_LEN_MIN,
             CATEGORY_LEN_MAX);
 
-    //TODO
     private String category;
     private List<Comment>comments;
 
@@ -50,7 +49,7 @@ public class MotorcycleImpl extends VehicleImpl implements Motorcycle{
     }
 
     private void setCategory(String category) {
-        ValidationHelpers.validateStringLength(category,CATEGORY_LEN_MIN,CATEGORY_LEN_MAX,CATEGORY_LEN_ERR);
+        ValidationHelpers.validateIntRange(category.length(),CATEGORY_LEN_MIN,CATEGORY_LEN_MAX,CATEGORY_LEN_ERR);
         this.category = category;
     }
 

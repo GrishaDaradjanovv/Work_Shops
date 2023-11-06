@@ -41,7 +41,7 @@ public abstract class VehicleImpl implements Vehicle {
     }
 
     private void setMake(String make) {
-        ValidationHelpers.validateStringLength(make,
+        ValidationHelpers.validateIntRange(make.length(),
                 MAKE_MIN_LENGTH,
                 MAKE_MAX_LENGTH,
                 String.format(ERROR_MESSAGE, make, MAKE_MIN_LENGTH, MAKE_MAX_LENGTH));
@@ -49,7 +49,7 @@ public abstract class VehicleImpl implements Vehicle {
     }
 
     private void setModel(String model) {
-        ValidationHelpers.validateStringLength(model,
+        ValidationHelpers.validateIntRange(model.length(),
                 MODEL_MIN_LENGTH,
                 MODEL_MAX_LENGTH,
                 String.format(ERROR_MESSAGE, make, MAKE_MIN_LENGTH, MODEL_MAX_LENGTH));
