@@ -30,8 +30,8 @@ public class CarImpl extends VehicleImpl implements Car {
 //            "Price must be between %.1f and %.1f!",
 //            PRICE_VAL_MIN,
 //            PRICE_VAL_MAX);
-    public static final int CAR_SEATS_MIN = 1;
-    public static final int CAR_SEATS_MAX = 10;
+    private static final int CAR_SEATS_MIN = 1;
+    private static final int CAR_SEATS_MAX = 10;
     private static final String CAR_SEATS_ERR = format(
             "Seats must be between %d and %d!",
             CAR_SEATS_MIN,
@@ -44,9 +44,10 @@ public class CarImpl extends VehicleImpl implements Car {
         super(make, model, price);
         setVehicleType(VehicleType.CAR);
         setSeats(seats);
+        this.comments = new ArrayList<>();
     }
 
-    public void setSeats(int seats) {
+    private void setSeats(int seats) {
         ValidationHelpers.validateIntRange(seats,CAR_SEATS_MIN,CAR_SEATS_MAX,CAR_SEATS_ERR);
         this.seats = seats;
     }
@@ -61,20 +62,20 @@ public class CarImpl extends VehicleImpl implements Car {
         return 4;
     }
 
-    @Override
-    public List<Comment> getComments() {
-        return new ArrayList<>(comments);
-    }
-
-    @Override
-    public void addComment(Comment comment) {
-        comments.add(comment);
-    }
-
-    @Override
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
-    }
+//    @Override
+//    public List<Comment> getComments() {
+//        return new ArrayList<>(comments);
+//    }
+//
+//    @Override
+//    public void addComment(Comment comment) {
+//        comments.add(comment);
+//    }
+//
+//    @Override
+//    public void removeComment(Comment comment) {
+//        comments.remove(comment);
+//    }
 
     @Override
     public String toString() {
