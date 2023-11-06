@@ -35,4 +35,10 @@ public class ValidationHelpers {
             throw new IllegalArgumentException(message);
         }
     }
+
+    public static void validateStringLength(String value, int max, int min, String message) {
+        if (value.length() < min || value.length() > max) {
+            throw new IllegalArgumentException(message);
+        }
+    }
 }
