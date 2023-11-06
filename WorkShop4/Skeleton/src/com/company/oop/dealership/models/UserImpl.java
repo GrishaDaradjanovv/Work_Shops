@@ -1,8 +1,17 @@
 package com.company.oop.dealership.models;
 
+import com.company.oop.dealership.models.contracts.Comment;
+import com.company.oop.dealership.models.contracts.User;
+import com.company.oop.dealership.models.contracts.Vehicle;
+import com.company.oop.dealership.models.enums.UserRole;
+import com.company.oop.dealership.utils.ValidationHelpers;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.String.format;
 
-public class UserImpl {
+public class UserImpl implements User {
 
     public static final int USERNAME_LEN_MIN = 2;
     public static final int USERNAME_LEN_MAX = 20;
@@ -22,19 +31,19 @@ public class UserImpl {
             PASSWORD_LEN_MIN,
             PASSWORD_LEN_MAX);
 
-    public static final int LASTNAME_LEN_MIN = 2;
-    public static final int LASTNAME_LEN_MAX = 20;
-    private static final String LASTNAME_LEN_ERR = format(
+    public static final int LAST_NAME_LEN_MIN = 2;
+    public static final int LAST_NAME_LEN_MAX = 20;
+    private static final String LAST_NAME_LEN_ERR = format(
             "Lastname must be between %s and %s characters long!",
-            LASTNAME_LEN_MIN,
-            LASTNAME_LEN_MAX);
+            LAST_NAME_LEN_MIN,
+            LAST_NAME_LEN_MAX);
 
-    public static final int FIRSTNAME_LEN_MIN = 2;
-    public static final int FIRSTNAME_LEN_MAX = 20;
+    public static final int FIRST_NAME_LEN_MIN = 2;
+    public static final int FIRST_NAME_LEN_MAX = 20;
     private static final String FIRSTNAME_LEN_ERR = format(
             "Firstname must be between %s and %s characters long!",
-            FIRSTNAME_LEN_MIN,
-            FIRSTNAME_LEN_MAX);
+            FIRST_NAME_LEN_MIN,
+            FIRST_NAME_LEN_MAX);
 
     private final static String NOT_AN_VIP_USER_VEHICLES_ADD = "You are not VIP and cannot add more than %d vehicles!";
     private final static String ADMIN_CANNOT_ADD_VEHICLES = "You are an admin and therefore cannot add vehicles!";
@@ -46,6 +55,12 @@ public class UserImpl {
     private static final int NORMAL_ROLE_VEHICLE_LIMIT = 5;
 
     //TODO
+    private String username;
+    private String firstName;
+    private String lastName;
+    private String password;
+    private UserRole userRole;
+    private List<Vehicle> vehicles;
 
     @Override
     public boolean equals(Object o) {
@@ -54,5 +69,129 @@ public class UserImpl {
         UserImpl user = (UserImpl) o;
         return username.equals(user.username) && firstName.equals(user.firstName)
                 && lastName.equals(user.lastName) && userRole == user.userRole;
+    }
+
+    public UserImpl(String username, String firstName, String lastName, String password, UserRole userRole) {
+        vehicles = new ArrayList<>();
+        setUsername(username);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setPassword(password);
+        setUserRole(userRole);
+    }
+
+    private void setUsername(String username) {
+        ValidationHelpers.validateStringLength(username, USERNAME_LEN_MIN, USERNAME_LEN_MAX, USERNAME_LEN_ERR);
+        this.username = username;
+    }
+
+    private void setFirstName(String firstName) {
+        ValidationHelpers.validateStringLength(firstName, FIRST_NAME_LEN_MIN, FIRST_NAME_LEN_MAX, FIRSTNAME_LEN_ERR);
+        this.firstName = firstName;
+    }
+
+    private void setLastName(String lastName) {
+        ValidationHelpers.validateStringLength(lastName, LAST_NAME_LEN_MIN, LAST_NAME_LEN_MAX, LAST_NAME_LEN_ERR);
+        this.lastName = lastName;
+    }
+
+    private void setPassword(String password) {
+        ValidationHelpers.validateStringLength(password,PASSWORD_LEN_MIN,PASSWORD_LEN_MAX,PASSWORD_LEN_ERR);
+        validatePattern();
+        this.password = password;
+    }
+
+    private void validatePattern() {
+        ValidationHelpers.validatePattern(password, PASSWORD_REGEX_PATTERN, PASSWORD_PATTERN_ERR);
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public String getLastName() {
+        return lastName;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public UserRole getRole() {
+        return userRole;
+    }
+
+    @Override
+    public List<Vehicle> getVehicles() {
+        return new ArrayList<>(vehicles);
+    }
+
+    @Override
+    public void addVehicle(Vehicle vehicle) {
+        switch (userRole){
+            case VIP -> vehicles.add(vehicle);
+            case ADMIN ->throw new IllegalArgumentException(ADMIN_CANNOT_ADD_VEHICLES);
+            case NORMAL -> {
+                if (vehicles.size() > NORMAL_ROLE_VEHICLE_LIMIT){
+                throw new IllegalArgumentException(String.format("%s %d",
+                        NOT_AN_VIP_USER_VEHICLES_ADD,
+                        NORMAL_ROLE_VEHICLE_LIMIT));
+                }
+                vehicles.add(vehicle);
+            }
+        }
+    }
+
+    @Override
+    public void removeVehicle(Vehicle vehicle) {
+        vehicles.remove(vehicle);
+    }
+
+    @Override
+    public void addComment(Comment commentToAdd, Vehicle vehicleToAddComment) {
+        for (Vehicle vehicle : vehicles) {
+            vehicle.addComment(commentToAdd);
+        }
+    }
+
+    @Override
+    public void removeComment(Comment commentToRemove, Vehicle vehicleToRemoveComment) {
+        for (Vehicle vehicle : vehicles) {
+            vehicle.removeComment(commentToRemove);
+        }
+    }
+
+    @Override
+    public String printVehicles() {
+        return vehicles.toString();
+    }
+
+    @Override
+    public boolean isAdmin() {
+        if (userRole.equals(UserRole.ADMIN)){
+        throw new IllegalArgumentException(ADMIN_CANNOT_ADD_VEHICLES);
+        }
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("""
+                --USERS--
+                Username: %s, FullName: %s %s ,Role: %s
+                """,getUsername(),getFirstName(),getLastName(),getRole());
     }
 }
