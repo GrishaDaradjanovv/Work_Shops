@@ -35,7 +35,7 @@ public abstract class VehicleImpl implements Vehicle {
         setMake(make);
         setModel(model);
         setPrice(price);
-        comments = new ArrayList<>();
+       this.comments = new ArrayList<>();
         setVehicleType(vehicleType);
 
     }
@@ -67,7 +67,7 @@ public abstract class VehicleImpl implements Vehicle {
 
     @Override
     public List<Comment> getComments() {
-        return  new ArrayList<>(comments);
+        return new ArrayList<>(comments);
     }
 
     @Override
@@ -92,20 +92,20 @@ public abstract class VehicleImpl implements Vehicle {
 
     @Override
     public void addComment(Comment comment) {
-        comments.add(comment);
+        this.comments.add(comment);
     }
 
     @Override
     public void removeComment(Comment comment) {
-        comments.remove(comment);
+        this.comments.remove(comment);
     }
     public String toString(){
         return String.format("""
-                #. %s
+                 %s:
                 Make: %s
-                Model: %s
                 Price: $%.1f
-                """,getType(),getMake(),getModel(),getPrice());
+                Model: %s
+                """,getType(),getMake(),getPrice(),getModel());
     }
     /*
     Make: {make}

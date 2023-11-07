@@ -14,16 +14,16 @@ public class CommentImpl implements Comment {
             CONTENT_LEN_MIN,
             CONTENT_LEN_MAX);
 
-    String author;
-    String content;
+    private String author;
+    private String content;
 
-    public CommentImpl(String author,String content){
+    public CommentImpl(String content, String author) {
         setContent(content);
         this.author = author;
     }
 
     private void setContent(String content) {
-        ValidationHelpers.validateIntRange(content.length(),CONTENT_LEN_MIN,CONTENT_LEN_MAX,CONTENT_LEN_ERR);
+        ValidationHelpers.validateIntRange(content.length(), CONTENT_LEN_MIN, CONTENT_LEN_MAX, CONTENT_LEN_ERR);
         this.content = content;
     }
 
@@ -42,6 +42,6 @@ public class CommentImpl implements Comment {
         return String.format("""
                  %s
                 User: %s
-                """,getContent(),getAuthor());
+                """, getContent(), getAuthor());
     }
 }

@@ -8,7 +8,7 @@ import static java.lang.String.format;
 
 public class TruckImpl extends VehicleImpl implements Truck {
 
-//    public static final int MAKE_NAME_LEN_MIN = 2;
+    //    public static final int MAKE_NAME_LEN_MIN = 2;
 //    public static final int MAKE_NAME_LEN_MAX = 15;
 //    private static final String MAKE_NAME_LEN_ERR = format(
 //            "Make must be between %s and %s characters long!",
@@ -35,14 +35,14 @@ public class TruckImpl extends VehicleImpl implements Truck {
 
     private int weightCapacity;
 
-    public TruckImpl(String make, String model, double price, int weightCapacity){
-        super(make,model,price);
+    public TruckImpl(String make, String model, double price, int weightCapacity) {
+        super(make, model, price);
         setVehicleType(VehicleType.TRUCK);
         setWeightCapacity(weightCapacity);
     }
 
     private void setWeightCapacity(int weightCapacity) {
-        ValidationHelpers.validateIntRange(weightCapacity,WEIGHT_CAP_MIN,WEIGHT_CAP_MAX,WEIGHT_CAP_ERR);
+        ValidationHelpers.validateIntRange(weightCapacity, WEIGHT_CAP_MIN, WEIGHT_CAP_MAX, WEIGHT_CAP_ERR);
         this.weightCapacity = weightCapacity;
     }
 
@@ -62,6 +62,6 @@ public class TruckImpl extends VehicleImpl implements Truck {
                 %s
                 Wheels: %d
                 Weight Capacity: %dt
-                """,super.toString(),getWheels(),getWeightCapacity());
+                """, super.toString(), getWheels(), getWeightCapacity());
     }
 }

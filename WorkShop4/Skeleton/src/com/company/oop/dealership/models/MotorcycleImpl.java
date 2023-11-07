@@ -11,9 +11,9 @@ import java.util.List;
 
 import static java.lang.String.format;
 
-public class MotorcycleImpl extends VehicleImpl implements Motorcycle{
+public class MotorcycleImpl extends VehicleImpl implements Motorcycle {
 
-//    public static final int MAKE_NAME_LEN_MIN = 2;
+    //    public static final int MAKE_NAME_LEN_MIN = 2;
 //    public static final int MAKE_NAME_LEN_MAX = 15;
 //    private static final String MAKE_NAME_LEN_ERR = format(
 //            "Make must be between %s and %s characters long!",
@@ -39,17 +39,16 @@ public class MotorcycleImpl extends VehicleImpl implements Motorcycle{
             CATEGORY_LEN_MAX);
 
     private String category;
-    private List<Comment>comments;
 
-    public MotorcycleImpl(String make, String model,double price, String category){
-        super(make,model,price);
+    public MotorcycleImpl(String make, String model, double price, String category) {
+        super(make, model, price);
         setCategory(category);
         setVehicleType(VehicleType.MOTORCYCLE);
 
     }
 
     private void setCategory(String category) {
-        ValidationHelpers.validateIntRange(category.length(),CATEGORY_LEN_MIN,CATEGORY_LEN_MAX,CATEGORY_LEN_ERR);
+        ValidationHelpers.validateIntRange(category.length(), CATEGORY_LEN_MIN, CATEGORY_LEN_MAX, CATEGORY_LEN_ERR);
         this.category = category;
     }
 
@@ -63,28 +62,12 @@ public class MotorcycleImpl extends VehicleImpl implements Motorcycle{
         return 2;
     }
 
-//    @Override
-//    public void addComment(Comment comment) {
-//        comments.add(comment);
-//    }
-//
-//    @Override
-//    public void removeComment(Comment comment) {
-//        comments.remove(comment);
-//    }
-//
-//    @Override
-//    public List<Comment> getComments() {
-//        return new ArrayList<>(comments);
-//    }
-
-
     @Override
     public String toString() {
         return String.format("""
                 %s
                 Wheels: %d
                 Category: %s
-                """, super.toString(),getWheels(),getCategory());
+                """, super.toString(), getWheels(), getCategory());
     }
 }

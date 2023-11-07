@@ -53,6 +53,7 @@ public class UserImpl implements User {
     private final static String NO_VEHICLES_HEADER = "--NO VEHICLES--";
     private final static String USER_HEADER = "--USER %s--";
     private static final int NORMAL_ROLE_VEHICLE_LIMIT = 5;
+    private static final String NO_COMMENTS = "--NO COMMENTS--";
 
     private String username;
     private String firstName;
@@ -60,6 +61,7 @@ public class UserImpl implements User {
     private String password;
     private UserRole userRole;
     private List<Vehicle> vehicles;
+    private List<User>users;
 
     @Override
     public boolean equals(Object o) {
@@ -84,8 +86,9 @@ public class UserImpl implements User {
         ValidationHelpers.validateIntRange(username.length(), USERNAME_LEN_MIN, USERNAME_LEN_MAX, USERNAME_LEN_ERR);
         this.username = username;
     }
-    private void usernamePattern(String username){
-        ValidationHelpers.validatePattern(username,USERNAME_REGEX_PATTERN,USERNAME_PATTERN_ERR);
+
+    private void usernamePattern(String username) {
+        ValidationHelpers.validatePattern(username, USERNAME_REGEX_PATTERN, USERNAME_PATTERN_ERR);
     }
 
     private void setFirstName(String firstName) {
@@ -99,7 +102,7 @@ public class UserImpl implements User {
     }
 
     private void setPassword(String password) {
-        ValidationHelpers.validateIntRange(password.length(),PASSWORD_LEN_MIN,PASSWORD_LEN_MAX,PASSWORD_LEN_ERR);
+        ValidationHelpers.validateIntRange(password.length(), PASSWORD_LEN_MIN, PASSWORD_LEN_MAX, PASSWORD_LEN_ERR);
         validatePattern(password);
         this.password = password;
     }
@@ -114,17 +117,17 @@ public class UserImpl implements User {
 
     @Override
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     @Override
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     @Override
     public String getLastName() {
-        return lastName;
+        return this.lastName;
     }
 
     @Override
@@ -134,7 +137,7 @@ public class UserImpl implements User {
 
     @Override
     public UserRole getRole() {
-        return userRole;
+        return this.userRole;
     }
 
     @Override
@@ -144,17 +147,19 @@ public class UserImpl implements User {
 
     @Override
     public void addVehicle(Vehicle vehicle) {
-        switch (userRole){
-            case VIP -> vehicles.add(vehicle);
-            case ADMIN ->throw new IllegalArgumentException(ADMIN_CANNOT_ADD_VEHICLES);
-            case NORMAL -> {
-                if (vehicles.size() >= NORMAL_ROLE_VEHICLE_LIMIT){
-                throw new IllegalArgumentException(String.format("%s %d",
-                        NOT_AN_VIP_USER_VEHICLES_ADD,
-                        NORMAL_ROLE_VEHICLE_LIMIT));
+        switch (userRole) {
+            case VIP:
+                vehicles.add(vehicle);
+                break;
+            case ADMIN:
+                throw new IllegalArgumentException(String.format("%s", ADMIN_CANNOT_ADD_VEHICLES));
+            case NORMAL:
+                if (vehicles.size() >= NORMAL_ROLE_VEHICLE_LIMIT) {
+                    throw new IllegalArgumentException(String.format(
+                            NOT_AN_VIP_USER_VEHICLES_ADD,
+                            NORMAL_ROLE_VEHICLE_LIMIT));
                 }
                 vehicles.add(vehicle);
-            }
         }
     }
 
@@ -165,36 +170,63 @@ public class UserImpl implements User {
 
     @Override
     public void addComment(Comment commentToAdd, Vehicle vehicleToAddComment) {
-        for (Vehicle vehicle : vehicles) {
-            vehicle.addComment(commentToAdd);
-        }
+        vehicleToAddComment.addComment(commentToAdd);
     }
 
     @Override
     public void removeComment(Comment commentToRemove, Vehicle vehicleToRemoveComment) {
-        for (Vehicle vehicle : vehicles) {
-            vehicle.removeComment(commentToRemove);
-        }
+            if (!username.equals(commentToRemove.getAuthor())){
+                throw new IllegalArgumentException(YOU_ARE_NOT_THE_AUTHOR);
+            }
+            vehicleToRemoveComment.removeComment(commentToRemove);
+//            if (author.getAuthor().equals(username)){
+//                vehicle.removeComment(commentToRemove);
+//            }else {
+//                throw new IllegalArgumentException(YOU_ARE_NOT_THE_AUTHOR);
+//
+
     }
 
     @Override
     public String printVehicles() {
-        return vehicles.toString();
-    }
+        int counter = 1;
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format(USER_HEADER, username)).append("\n");
+        if (getVehicles().isEmpty()) {
+            sb.append(NO_VEHICLES_HEADER);
+        } else {
+            for (Vehicle vehicle : getVehicles()) {
+                sb.append(counter).append(".");
+                sb.append(vehicle.toString());
+                if (vehicle.getComments().isEmpty()) {
+                    sb.append(NO_COMMENTS).append("\n");
+                } else {
+                    for (Comment comment : vehicle.getComments()) {
+                        sb.append(comment.toString());
+                    }
+                }
+                counter++;
+            }
+        }
+        return sb.toString();
 
+    }
     @Override
     public boolean isAdmin() {
-        if (userRole.equals(UserRole.ADMIN)){
-        throw new IllegalArgumentException(ADMIN_CANNOT_ADD_VEHICLES);
+        if (userRole.equals(UserRole.ADMIN)) {
+            throw new IllegalArgumentException(ADMIN_CANNOT_ADD_VEHICLES);
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return String.format("""
-                --USERS--
-                Username: %s, FullName: %s %s ,Role: %s
-                """,getUsername(),getFirstName(),getLastName(),getRole());
+        StringBuilder sb = new StringBuilder();
+        int counter = 1;
+        for (User user : users) {
+            sb.append(counter).append(user.toString());
+            counter++;
+        }
+        return sb.toString();
     }
 }

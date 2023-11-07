@@ -23,7 +23,7 @@ public class ShowUsersCommand extends BaseCommand {
         ValidationHelpers.validateArgumentsCount(parameters,EXPECTED_NUMBER_OF_ARGUMENTS);
         User user = getVehicleDealershipRepository().getLoggedInUser();
         if (user.getRole() != UserRole.ADMIN){
-        throw new IllegalArgumentException("You are not admin!");
+        throw new IllegalArgumentException("You are not an admin!");
         }
         return user.getUsername();
     }

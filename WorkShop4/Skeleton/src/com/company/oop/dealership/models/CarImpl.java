@@ -12,7 +12,7 @@ import static java.lang.String.format;
 
 public class CarImpl extends VehicleImpl implements Car {
 
-//    public static final int MAKE_NAME_LEN_MIN = 2;
+    //    public static final int MAKE_NAME_LEN_MIN = 2;
 //    public static final int MAKE_NAME_LEN_MAX = 15;
 //    private static final String MAKE_NAME_LEN_ERR = format(
 //            "Make must be between %s and %s characters long!",
@@ -38,17 +38,15 @@ public class CarImpl extends VehicleImpl implements Car {
             CAR_SEATS_MAX);
 
     private int seats;
-    private List<Comment> comments;
 
     public CarImpl(String make, String model, double price, int seats) {
         super(make, model, price);
         setVehicleType(VehicleType.CAR);
         setSeats(seats);
-        this.comments = new ArrayList<>();
     }
 
     private void setSeats(int seats) {
-        ValidationHelpers.validateIntRange(seats,CAR_SEATS_MIN,CAR_SEATS_MAX,CAR_SEATS_ERR);
+        ValidationHelpers.validateIntRange(seats, CAR_SEATS_MIN, CAR_SEATS_MAX, CAR_SEATS_ERR);
         this.seats = seats;
     }
 
@@ -62,20 +60,20 @@ public class CarImpl extends VehicleImpl implements Car {
         return 4;
     }
 
-    @Override
-    public List<Comment> getComments() {
-        return new ArrayList<>(comments);
-    }
-
-    @Override
-    public void addComment(Comment comment) {
-        comments.add(comment);
-    }
-
-    @Override
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
-    }
+//    @Override
+//    public void addComment(Comment comment) {
+//        comments.add(comment);
+//    }
+//
+//    @Override
+//    public void removeComment(Comment comment) {
+//        comments.remove(comment);
+//    }
+//
+//    @Override
+//    public List<Comment> getComments() {
+//        return new ArrayList<>(comments);
+//    }
 
     @Override
     public String toString() {
@@ -83,6 +81,6 @@ public class CarImpl extends VehicleImpl implements Car {
                 %s
                 Wheels: %d
                 Seats: %d
-                """,super.toString(),getWheels(),getSeats());
+                """, super.toString(), getWheels(), getSeats());
     }
 }
