@@ -60,8 +60,7 @@ public class TruckImpl extends VehicleImpl implements Truck {
     public String toString() {
         return String.format("""
                 %s
-                Wheels: %d
                 Weight Capacity: %dt
-                """, super.toString(), getWheels(), getWeightCapacity());
+                """, super.toString(),getWeightCapacity());
     }
 }

@@ -79,8 +79,7 @@ public class CarImpl extends VehicleImpl implements Car {
     public String toString() {
         return String.format("""
                 %s
-                Wheels: %d
                 Seats: %d
-                """, super.toString(), getWheels(), getSeats());
+                """, super.toString(),getSeats());
     }
 }

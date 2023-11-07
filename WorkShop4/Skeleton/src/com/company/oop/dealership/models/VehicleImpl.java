@@ -96,6 +96,9 @@ public abstract class VehicleImpl implements Vehicle {
     }
 
     @Override
+    public abstract int getWheels();
+
+    @Override
     public void removeComment(Comment comment) {
         this.comments.remove(comment);
     }
@@ -103,9 +106,9 @@ public abstract class VehicleImpl implements Vehicle {
         return String.format("""
                  %s:
                 Make: %s
-                Price: $%.1f
                 Model: %s
-                """,getType(),getMake(),getPrice(),getModel());
+                Wheels: %d
+                Price: $%.1f""",getType(),getMake(),getModel(),getWheels(),getPrice());
     }
     /*
     Make: {make}

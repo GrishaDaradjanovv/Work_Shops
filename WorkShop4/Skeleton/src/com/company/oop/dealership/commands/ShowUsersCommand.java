@@ -25,7 +25,7 @@ public class ShowUsersCommand extends BaseCommand {
         if (user.getRole() != UserRole.ADMIN){
         throw new IllegalArgumentException("You are not an admin!");
         }
-        return user.getUsername();
+        return user.toString();
     }
 
 }

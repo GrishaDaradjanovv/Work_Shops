@@ -223,6 +223,7 @@ public class UserImpl implements User {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         int counter = 1;
+        sb.append("--USERS--");
         for (User user : users) {
             sb.append(counter).append(user.toString());
             counter++;

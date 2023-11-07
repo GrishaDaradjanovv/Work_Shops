@@ -66,8 +66,7 @@ public class MotorcycleImpl extends VehicleImpl implements Motorcycle {
     public String toString() {
         return String.format("""
                 %s
-                Wheels: %d
                 Category: %s
-                """, super.toString(), getWheels(), getCategory());
+                """, super.toString(),getCategory());
     }
 }
